@@ -2,6 +2,9 @@
 
 ## Node JS Must be installed
 
+- https://www.nodejs.org/
+- Choose 'LTS' version for best experience
+
 ## Run the following commands to get started
 
 - npm install
