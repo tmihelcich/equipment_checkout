@@ -1,0 +1,17 @@
+extends ./layout/_layout
+
+block content
+  h1 Check-Out Report Page
+  table.table.table-condensed
+    thead
+      tr
+        th Tool
+        th Checked Out By
+      each tool in checkedOutTools
+        tr 
+          td= tool.name
+          td= tool.checkedOutBy
+      else 
+        tr
+          td(colspan=2).text-center.text-muted
+            | Nothing is currently checked out

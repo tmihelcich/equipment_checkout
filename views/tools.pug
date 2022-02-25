@@ -1,0 +1,33 @@
+extends ./layout/_layout
+
+block content
+  h2 Current Tools
+  
+  .list-group
+    each tool in tools
+      a.list-group-item(href=`/tools/${tool._id}`)= tool.name
+    else
+      .list-group-item.text-muted You have no tools. Add some below.
+
+  hr
+
+  h2 Add New Tool
+  form(action="/tools" method="POST")
+    .form-group
+      label(for="") Tool Name 
+      input.form-control(name="name")
+    .form-group 
+      label(for="description") Description
+      textarea.form-control(type="text" rows="3" name="description")
+    .form-group 
+      label(for="location") Location
+      select.form-control(name="location")
+        - var options = ["Main Warehouse", "Secondary Warehouse"] 
+        each option of options
+          option= option
+    .form-group 
+      label(for="skill") Required Skill Classification
+      select.form-control(name="skill")
+        each skill of skillLevels
+          option= skill
+    button.btn.btn-primary Save

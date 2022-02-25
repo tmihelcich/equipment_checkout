@@ -1,0 +1,65 @@
+extends ./layout/_layout
+
+block content
+  if success && successEmployee && successTool
+    .alert.alert-success(role="alert")
+      p 
+        span
+          strong= successEmployee
+        span &nbsp;successfully checked out
+        span 
+          strong= successTool
+  else if employeeSuccessful === false
+    .alert.alert-danger(role="alert")
+      p Something went wrong, could not add that employee.
+  h1 Check-Out Page
+  form(action="/checkout" method="POST")
+    .row
+      .col-xs-12
+        .form-group
+          label(for="employeeid") Please Scan/Enter <strong>Employee ID</strong>
+          .input-group 
+            input.form-control(id="employeeidinput" name="employeeid" type="text")
+            .input-group-btn
+              button.btn.btn-default.dropdown-toggle(data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                | DEV: Select Employee&nbsp;
+                span.caret
+              ul.dropdown-menu
+                each employee of availableEmployees
+                  li.employee(data-id=`${employee._id}`)
+                    a(href="#")= employee.name
+                script.
+                  const employeeIds = document.getElementsByClassName('employee');
+                  Array.from(employeeIds).forEach(element => {
+                    element.addEventListener('click', function(event) {
+                      const id = $(event.currentTarget).data('id');
+                      console.log('id', id);
+                      $('#employeeidinput').val(id);
+                    })
+                  });
+    .row
+      .col-xs-12
+        .form-group
+          label(for="employeeid") Please Scan/Enter <strong>Tool Barcode</strong>
+          .input-group
+            input.form-control(id="toolidinput" name="toolid" type="text")
+            .input-group-btn
+              button.btn.btn-default.dropdown-toggle(data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                | DEV: Select Tool&nbsp;
+                span.caret
+              ul.dropdown-menu
+                each tool of availableTools
+                  li.tool(data-id=`${tool._id}`)
+                    a(href="#")= tool.name
+                script.
+                  const toolIds = document.getElementsByClassName('tool');
+                  Array.from(toolIds).forEach(element => {
+                    element.addEventListener('click', function(event) {
+                      const id = $(event.currentTarget).data('id');
+                      console.log('id', id);
+                      $('#toolidinput').val(id);
+                    })
+                  });
+    .row
+      .col-xs-12
+        button.btn.btn-default Submit

@@ -1,0 +1,22 @@
+extends ./layout/_layout
+
+block content
+  a(href="/tools").btn.btn-link Go Back
+  .panel.panel-default
+    .panel-heading
+      .panel-title= tool.name
+    .panel-body
+      p= tool.description
+      dl 
+        dt Availability
+        dd= tool.availability 
+        dt Skill Level Required
+        dd= tool.skill
+      if tool.checkedOutBy
+        p Tool is checked out by 
+          strong= tool.checkedOutBy
+    .panel-footer
+      form(action=`/tools/delete/${tool._id}`, method="POST") 
+        button.btn.btn-danger(type="submit") Delete Tool
+
+      

@@ -1,0 +1,39 @@
+extends ./layout/_layout 
+
+
+block content
+  if checkinSuccessful
+    .alert.alert-success(role="alert")
+      p Successfully checked in equipment
+  else if checkinSuccessful === false
+    .alert.alert-danger(role="alert")
+      p Something went wrong, could not check that in.
+  h1 Check In Equipment
+  form(action="/checkin" method="POST")
+    .row
+      .col-xs-12
+        .form-group
+          label(for="employeeid") Please Scan/Enter Tool Barcode
+          .input-group 
+            input.form-control(id="toolidinput" name="toolid" type="text")
+            //- input.form-control(id="employeeidinput" name="employeeid" type="text")
+            .input-group-btn
+              button.btn.btn-default.dropdown-toggle(data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                | DEV: Checked Out Tools&nbsp;
+                span.caret
+              ul.dropdown-menu
+                each tool of checkedOutTools
+                  li.tool(data-id=`${tool._id}`)
+                    a(href="#")= tool.name
+                script.
+                  const toolIds = document.getElementsByClassName('tool');
+                  Array.from(toolIds).forEach(element => {
+                    element.addEventListener('click', function(event) {
+                      const id = $(event.currentTarget).data('id');
+                      console.log('id', id);
+                      $('#toolidinput').val(id);
+                    })
+                  });
+    .row
+      .col-xs-12
+        button.btn.btn-default Submit

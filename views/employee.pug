@@ -1,0 +1,28 @@
+extends ./layout/_layout
+
+block content
+  a(href="/employees").btn.btn-link Go Back
+  .panel.panel-default
+    .panel-heading
+      .panel-title
+        span= employee.name
+        | &nbsp;
+        span.text-muted
+          small= employee._id
+    .panel-body
+      dl 
+        dt DOB
+        dd= employee.dob.toLocaleString('en-US', {dateStyle: 'medium'})
+        dt Phone
+        dd= employee.phone
+        dt Email 
+        dd= employee.email
+        dt Job
+        dd= employee.job
+        dt Skills 
+        dd= employee.skills
+    .panel-footer
+      form(action=`/employees/delete/${employee._id}`, method="POST") 
+        button.btn.btn-danger(type="submit") Delete Employee
+
+      

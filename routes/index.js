@@ -3,7 +3,12 @@ var router = express.Router();
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("index", { title: "Equipment Checkout System" });
+  console.log("req.baseUrl", req.baseUrl);
+
+  res.render("index", {
+    title: "Equipment Checkout System",
+    route: req.baseUrl,
+  });
 });
 
 module.exports = router;

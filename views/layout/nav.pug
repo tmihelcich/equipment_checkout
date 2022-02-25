@@ -1,0 +1,20 @@
+nav.navbar.navbar-default.navbar-static-top
+  .container
+    ul.nav.navbar-nav
+      li( class={active: route === ''})
+        a(href="/") Home
+      li( class={active: route === '/checkin'})
+        a(href="/checkin") Check-In
+      li( class={active: route === '/checkout'})
+        a(href="/checkout") Check-Out
+      li.dropdown( class={active: route === "/checkoutreport"})
+        a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
+          | Reports
+          span.caret
+        ul.dropdown-menu
+          li
+            a(href="/checkoutreport") Checked Out Equipment
+      li( class={active: route === '/tools'})
+        a(href="/tools" class={active: route === '/tools'}) Tools
+      li( class={active: route === '/employees'})
+        a(href="/employees" class={active: route === '/employees'}) Employees

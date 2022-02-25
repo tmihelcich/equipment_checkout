@@ -1,0 +1,37 @@
+extends ./layout/_layout
+
+block content
+  if employeeSuccessful
+    .alert.alert-success(role="alert")
+      p Successfully added employee
+  else if employeeSuccessful === false
+    .alert.alert-danger(role="alert")
+      p Something went wrong, could not add that employee.
+  h2 Current Employees
+  
+  .list-group
+    each employee in employees
+      a.list-group-item(href=`/employees/${employee._id}`)= employee.name
+    else
+      .list-group-item.text-muted You have no employees. Add some below.
+
+  hr
+
+  h2 Add New Employee
+  form(action="/employees" method="POST")
+    .form-group
+      label(for="name") Employee Name 
+      input.form-control(name="name")
+    .form-group 
+      label(for="dob") DOB
+      input.form-control(type="text" name="dob")
+    .form-group 
+      label(for="phone") Phone
+      input.form-control(type="text" name="phone")
+    .form-group 
+      label(for="email") Email
+      input.form-control(type="text" name="email")
+    .form-group 
+      label(for="job") Job
+      input.form-control(type="text" name="job")
+    button.btn.btn-primary Save
