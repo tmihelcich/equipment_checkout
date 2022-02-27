@@ -11,7 +11,9 @@ block content
   
   .list-group
     each employee in employees
-      a.list-group-item(href=`/employees/${employee._id}`)= employee.name
+      a.list-group-item(href=`/employees/${employee._id}`)
+        span= employee.name
+        span.text-muted= ` ${employee.skill || ''}`
     else
       .list-group-item.text-muted You have no employees. Add some below.
 

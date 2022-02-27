@@ -1,6 +1,12 @@
-export class Supervisor {
-  #id;
+const Employee = require("../models/employeeModel");
+const { ObjectId } = require("mongoose").Types;
 
-  setEmployeeSkills(employee, skillsList) {}
-  terminateEmployee(employee) {}
+class Supervisor {
+  constructor() {}
+
+  static async sendSkillClassificationUpdate(empId, skill) {
+    Employee.updateOne({ _id: ObjectId(empId) }, { $set: { skill: skill } });
+  }
 }
+
+module.exports = Supervisor;

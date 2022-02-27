@@ -2,6 +2,7 @@ const express = require("express");
 const Employee = require("../models/employeeModel");
 const { ObjectId } = require("mongoose").Types;
 const router = express.Router();
+const allowedSkillLevels = require("../data/skillLevels");
 
 router
   .route("/")
@@ -10,7 +11,7 @@ router
     if (employeeSuccessful && employeeSuccessful == "true") {
       employeeSuccessful = true;
     }
-    console.log("employeeSuccessful", employeeSuccessful);
+    // console.log("allowedSkillLevels", allowedSkillLevels);
 
     Employee.find({})
       .then((employees) => {
@@ -36,9 +37,16 @@ router
 
 router.route("/:id").get((req, res) => {
   // console.log(req.params.id);
+
   Employee.findById(ObjectId(req.params.id))
     .then((employee) => {
-      res.status(200).render("employee", { employee, route: req.baseUrl });
+      res
+        .status(200)
+        .render("employee", {
+          employee,
+          route: req.baseUrl,
+          allowedSkillLevels,
+        });
     })
     .catch((error) => res.render("error", { error }));
 });

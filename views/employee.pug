@@ -19,8 +19,15 @@ block content
         dd= employee.email
         dt Job
         dd= employee.job
-        dt Skills 
-        dd= employee.skills
+        dt Skill
+        dd
+          form(id="skillupdateform" action=`/skillclassupdate/${employee._id}` method="POST") 
+            select.form-control(name="skill" id="skillupdateselect" onchange="document.getElementById('skillupdateform').submit()")
+              each skillLevel of allowedSkillLevels 
+                option= skillLevel
+
+
+            
     .panel-footer
       form(action=`/employees/delete/${employee._id}`, method="POST") 
         button.btn.btn-danger(type="submit") Delete Employee

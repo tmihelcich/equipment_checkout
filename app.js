@@ -11,6 +11,7 @@ let checkoutReportRouter = require("./routes/checkoutreport");
 let employeesRouter = require("./routes/employees");
 let locateRouter = require("./routes/locate");
 let toolsRouter = require("./routes/tools");
+let skillClassUpdateRouter = require("./routes/skillclassupdate");
 const DataIO = require("./models/DataIO");
 
 const database = new DataIO();
@@ -35,6 +36,7 @@ app.use("/checkoutreport", checkoutReportRouter);
 app.use("/employees", employeesRouter);
 app.use("/locate", locateRouter);
 app.use("/tools", toolsRouter);
+app.use("/skillclassupdate", skillClassUpdateRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
